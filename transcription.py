@@ -1,4 +1,4 @@
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 audio_file= open("Recording.m4a", "rb")
-transcript = openai.Audio.transcribe("whisper-1", audio_file)
+transcript = openai.Audio.transcribe("whisper-1", audio_file)   
