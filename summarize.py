@@ -1,15 +1,26 @@
+import os
 import openai
 
-text = "Your text goes here..."
-api_key = "your_api_key_here"
+openai.api_key = ""
+with open('text.txt', 'r') as file:
+    user_content = file.read()
 
-openai.api_key = api_key
-
-response = openai.Completion.create(
-    engine="davinci",
-    prompt=f"Summarize the following text:\n{text}",
-    max_tokens=50  # Adjust the number of tokens as needed for your desired summary length
+response = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo-16k",
+  messages=[
+    {
+      "role": "system",
+      "content": "You will be provided with lecture notes, and your task is to summarize the lecture"
+    },
+    {
+      "role": "user",
+      "content": user_content
+    }
+  ],
+  temperature=0,
+  max_tokens=1024,
+  top_p=1,
+  frequency_penalty=0,
+  presence_penalty=0
 )
-
-summary = response.choices[0].text
-print(summary)
+print(response['choices'][0]['message']['content'])
