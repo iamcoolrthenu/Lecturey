@@ -1,26 +1,13 @@
 import os
 import openai
+import config
+openai.api_key = config.api_key
 
-openai.api_key = ""
-with open('text.txt', 'r') as file:
-    user_content = file.read()
-
-response = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo-16k",
-  messages=[
-    {
-      "role": "system",
-      "content": "You will be provided with lecture notes, and your task is to summarize the lecture"
-    },
-    {
-      "role": "user",
-      "content": user_content
-    }
-  ],
-  temperature=0,
-  max_tokens=1024,
-  top_p=1,
-  frequency_penalty=0,
-  presence_penalty=0
-)
-print(response['choices'][0]['message']['content'])
+def getNotes(transcript):
+  response = openai.Completion.create(
+      engine="text-davinci-002",  # Use the appropriate engine.
+      prompt="Write notes on the following: " + transcript,
+      max_tokens=500,
+      temperature=0.3,
+  )
+  return response['choices'][0]['text']
