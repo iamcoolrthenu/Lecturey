@@ -1,9 +1,8 @@
 import streamlit as st
 import openai
-import os
-
+import config
 # Set your OpenAI API key here
-openai.api_key = "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"
+openai.api_key = config.api_key
 
 def convert_audio_to_text(audio_file):
     try:
