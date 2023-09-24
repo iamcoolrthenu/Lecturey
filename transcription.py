@@ -1,18 +1,25 @@
-import openai as oai
+import openai
+import config
 
-oai.api_key = "YOUR_APIKEY"
-audio_file= open("testvid.mp4", "rb")
-transcript = oai.Audio.transcribe("whisper-1", audio_file) 
+openai.api_key = config.api_key
+vid_aud_file = open("testvid.mp4", "rb")
+raw_transcript = openai.Audio.transcribe("whisper-1", vid_aud_file)
+
+# Convert the transcript to a string
+uploaded_file = open(vid_aud_file, "rb") #reading the video in binary.
+transcript = str(uploaded_file) #converting the video from binary to string
 print(transcript)
 
-prompt = "Makes notes of this, format it like notion lecture notes:\n"+transcript
+# Specify the output file name
+output_file_name = transcript
 
-response = oai.Completion.create(
-    engine="text-davinci-002",  
-    prompt=prompt,
-    max_tokens=50,  
-)
+# Write the formatted transcription to the output file
+with open(output_file_name, "w") as output_file:
+    # Split the transcript into words
+    words = transcript.split()
+    # Iterate through the words and write 10 words per line
+    for i in range(0, len(words), 10):
+        line = " ".join(words[i:i+10])
+        output_file.write(line + "\n")
 
-# Extract and print the generated text
-generated_text = response.choices[0].text
-print(generated_text)
+print(f"Transcription saved to {output_file_name}")
