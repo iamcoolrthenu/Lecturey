@@ -2,7 +2,7 @@ import streamlit as st
 import openai
 import config
 # Set your OpenAI API key here
-openai.api_key = "fddffs"
+openai.api_key = config.api_key
 
 def convert_audio_to_text(audio_file):
     try:
