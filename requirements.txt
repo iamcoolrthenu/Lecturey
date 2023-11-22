@@ -2,4 +2,4 @@ streamlit
 selenium
 beautifulsoup4
 googlesearch-python
-openai
+openai==0.28
