@@ -2,8 +2,8 @@ from googlesearch import search
 from bs4 import BeautifulSoup
 import requests
 import openai
-import config
-openai.api_key = config.api_key
+import streamlit as st
+openai.api_key = st.secrets["api_key"]
 def get_image_urls(query, num_results=10):
     image_urls = []
 
