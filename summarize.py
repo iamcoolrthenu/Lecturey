@@ -1,8 +1,8 @@
+import streamlit as st
 import openai
-import config
 
 # Set OpenAI API key from the config file
-openai.api_key = config.api_key
+openai.api_key = st.secrets["api_key"]
 
 def getNotes(transcript):
     """
