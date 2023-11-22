@@ -1,4 +1,5 @@
 # Lecturey
+Lecturey Website is accessible at [https://lecturey.streamlit.app/](https://lecturey.streamlit.app/).
 
 ## Overview
 
