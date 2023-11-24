@@ -1,12 +1,11 @@
 import streamlit as st
 import openai
-import config
 import summarize
 import slide
 import imagegen
 
 # Set your OpenAI API key
-openai.api_key = config.api_key
+openai.api_key = st.secrets["api_key"]
 sections = []
 
 def convert_audio_to_text(audio_file):
@@ -54,3 +53,4 @@ for x in sections:
     )
     st.write(response['choices'][0]['text'])
     st.image(str(imagegen.getImage(imagegen.makeOneWord(x))), caption="Image from URL", use_column_width=True)
+
